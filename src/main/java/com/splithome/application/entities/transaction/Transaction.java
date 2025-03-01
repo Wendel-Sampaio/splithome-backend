@@ -20,6 +20,7 @@ public abstract class Transaction {
     @Column(unique = true)
     private UUID id;
 
+    private TransactionType type;
     @NotBlank
     private double value;
 
