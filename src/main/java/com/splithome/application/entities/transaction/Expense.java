@@ -1,4 +1,4 @@
 package com.splithome.application.entities.transaction;
 
-public class Despesa implements Transaction {
+public class Expense implements Transaction {
 }
