@@ -1,4 +1,5 @@
 package com.splithome.application.entities.transaction;
 
-public class Expense extends Transaction {
+public enum TypeTransaction {
+    EXPENSE, PURCHASE
 }

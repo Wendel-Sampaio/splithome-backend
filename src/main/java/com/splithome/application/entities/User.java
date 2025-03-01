@@ -33,7 +33,7 @@ public class User {
 
     @NotBlank(message = "O nome não pode ser vazio.")
     @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 à 50 caracteres.")
-    private String nome;
+    private String name;
 
     @NotBlank(message = "O email não pode ser vazio.")
     @Email(message = "O endereço de email precisa ter um formato válido.")
@@ -42,15 +42,15 @@ public class User {
 
     @NotBlank(message = "A senha não pode ser vazia.")
     @Size(min = 8, max = 50, message = "A senha precisa ter entre 8 à 50 caracteres.")
-    private String senha;
+    private String password;
 
     @NotNull(message = "O telefone não pode ser nulo.")
-    @Column(unique = true, length = 11)
-    private String telefone;
+    @Column(name = "phone_number", unique = true, length = 11)
+    private String phoneNumber;
 
     @NotNull(message = "A chave Pix não pode ser nula.")
-    @Column(name = "chave_pix", unique = true)
-    private String chavePix;
+    @Column(name = "pix_key", unique = true)
+    private String pixKey;
 
 
 }
