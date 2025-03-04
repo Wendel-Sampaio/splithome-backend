@@ -1,6 +1,5 @@
 package com.splithome.application.entities.transaction;
 
-import com.splithome.application.entities.Category;
 import com.splithome.application.entities.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -21,6 +20,7 @@ public abstract class Transaction {
     private UUID id;
 
     private TransactionType type;
+
     @NotBlank
     private double value;
 
