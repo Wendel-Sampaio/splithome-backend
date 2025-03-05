@@ -1,9 +1,11 @@
 package com.splithome.application.entities.transaction;
 
+import com.splithome.application.DTOs.TransactionDTO;
 import com.splithome.application.entities.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -11,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
+@Getter
+@Setter
 public abstract class Transaction {
 
     @Id
@@ -22,17 +27,24 @@ public abstract class Transaction {
     private TransactionType type;
 
     @NotBlank
-    private double value;
+    private String title;
 
     @NotBlank
     private Category category;
 
     @NotBlank
+    private double value;
+
+    @OneToMany(mappedBy = "transaction")
+    @JoinColumn(name = "transaction_id")
     private List<User> payers;
 
     @NotBlank
-    @Column(name = "payment_date")
     private Date paymentDate;
 
+    @OneToMany(mappedBy = "transaction")
+    @JoinColumn(name = "transaction_id")
+    private List<User> remainingPayers;
 
+    public abstract void updateTransaction(TransactionDTO transactionDTO);
 }

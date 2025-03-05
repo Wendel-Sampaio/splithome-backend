@@ -8,19 +8,19 @@ import com.splithome.application.repositories.UserRepository;
 import com.splithome.application.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/user/auth")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class AuthenticationUserController {
 
     @Autowired
