@@ -23,7 +23,6 @@ public abstract class Transaction {
     private UUID id;
 
     @NotNull
-    private TransactionType type;
 
     @NotBlank(message = "A transação precisa ter um título")
     private String title;
