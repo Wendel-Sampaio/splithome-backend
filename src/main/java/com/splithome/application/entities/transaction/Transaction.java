@@ -22,8 +22,6 @@ public abstract class Transaction {
     @Column(updatable = false)
     private UUID id;
 
-    @NotNull
-
     @NotBlank(message = "A transação precisa ter um título")
     private String title;
 
