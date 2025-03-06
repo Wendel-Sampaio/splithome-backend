@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/user/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationUserController {
 
     @Autowired

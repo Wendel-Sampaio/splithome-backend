@@ -8,6 +8,5 @@ import com.splithome.application.entities.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface UserRepository extends JpaRepository<User, UUID>{
-
     UserDetails findByEmail(String email);
 }
