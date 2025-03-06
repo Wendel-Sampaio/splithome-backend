@@ -1,35 +1,39 @@
 package com.splithome.application.services;
 
-import com.splithome.application.DTOs.TransactionDTO;
-import com.splithome.application.entities.transaction.Transaction;
-import com.splithome.application.entities.transaction.TransactionFactory;
-import com.splithome.application.repositories.TransactionRepository;
+import com.splithome.application.entities.transaction.Expense;
+import com.splithome.application.entities.transaction.Purchase;
+import com.splithome.application.repositories.ExpenseRepository;
+import com.splithome.application.repositories.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TransactionService {
 
     @Autowired
-    private TransactionFactory transactionFactory;
+    private PurchaseRepository purchaseRepository;
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    private ExpenseRepository expenseRepository;
 
-    public void processTransaction(Transaction transaction, TransactionDTO transactionDTO) {
-        transaction.updateTransaction(transactionDTO);
+    public List<Purchase> getAllPurchases() {
+        return purchaseRepository.findAll();
     }
 
-    public Transaction saveTransaction(TransactionDTO transactionDTO) {
-        Transaction transaction = transactionFactory.createTransaction(transactionDTO.type());
-        transaction.setTitle(transactionDTO.title());
-        transaction.setCategory(transactionDTO.category());
-        transaction.setValue(transactionDTO.value());
-        transaction.setPayers(transactionDTO.payers());
-        transaction.setPaymentDate(transactionDTO.paymentDate());
-        transaction.setRemainingPayers(transactionDTO.remainingPayers());
-        processTransaction(transaction, transactionDTO);
-        return transactionRepository.save(transaction);
+    public List<Expense> getAllExpenses() {
+        return expenseRepository.findAll();
+    }
+
+    public String savePurchase(Purchase purchase) {
+        purchaseRepository.save(purchase);
+        return "Erro ao salvar no banco de dados!";
+    }
+
+    public String saveExpense(Expense expense) {
+        expenseRepository.save(expense);
+        return "Erro ao salvar no banco de dados!";
     }
 
 }

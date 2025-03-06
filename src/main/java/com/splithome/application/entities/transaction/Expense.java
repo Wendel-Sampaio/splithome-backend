@@ -1,10 +1,17 @@
 package com.splithome.application.entities.transaction;
 
-import com.splithome.application.DTOs.TransactionDTO;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.UUID;
+
+@Entity
+@Getter
+@Setter
 public class Expense extends Transaction {
-    @Override
-    public void updateTransaction(TransactionDTO transactionDTO) {
-        //TODO
-    }
+
+    @NotNull(message = "O responsável não pode ser nulo")
+    private UUID responsibleId;
 }

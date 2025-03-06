@@ -1,17 +1,25 @@
 package com.splithome.application.entities.transaction;
 
-import com.splithome.application.DTOs.TransactionDTO;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
+import java.util.UUID;
 
+@Entity
+@Getter
+@Setter
 public class Purchase extends Transaction {
 
-    private String purchaser;
-    private Date purchaseDate;
+    @NotNull(message = "O comprador não pode ser nulo")
+    private UUID purchaserId;
 
-    @Override
-    public void updateTransaction(TransactionDTO transactionDTO) {
-        this.purchaser = transactionDTO.purchaser();
-        this.purchaseDate = transactionDTO.purchaseDate();
-    }
+    @NotNull(message = "A data não pode ser nula")
+    private Date purchaseDate;
 }

@@ -1,16 +1,13 @@
 package com.splithome.application.controllers;
 
-import com.splithome.application.DTOs.TransactionDTO;
-import com.splithome.application.entities.transaction.Transaction;
+import com.splithome.application.entities.transaction.Expense;
+import com.splithome.application.entities.transaction.Purchase;
 import com.splithome.application.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/transactions")
@@ -19,14 +16,27 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-    @PostMapping("/new-transaction")
-    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDTO transactionDTO) {
-        try {
-            Transaction transaction = transactionService.saveTransaction(transactionDTO);
-            return new ResponseEntity<>(transaction, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/expenses")
+    public ResponseEntity<List<Expense>> getAllExpenses() {
+        List<Expense> expenses = transactionService.getAllExpenses();
+        return ResponseEntity.ok(expenses);
     }
 
+    @GetMapping("/purchases")
+    public ResponseEntity<List<Purchase>> getAllPurchases() {
+        List<Purchase> purchases = transactionService.getAllPurchases();
+        return ResponseEntity.ok(purchases);
+    }
+
+    @PostMapping("new-expense")
+    public ResponseEntity<Expense> saveExpense(@RequestBody Expense expense) {
+        transactionService.saveExpense(expense);
+        return ResponseEntity.ok(expense);
+    }
+
+    @PostMapping("/new-purchase")
+    public ResponseEntity<Purchase> saveExpense(@RequestBody Purchase purchase) {
+        transactionService.savePurchase(purchase);
+        return ResponseEntity.ok(purchase);
+    }
 }

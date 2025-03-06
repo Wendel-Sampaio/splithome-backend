@@ -10,10 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,8 +27,7 @@ public class User implements UserDetails {
 
     @Id
     @UuidGenerator
-    @JdbcTypeCode(java.sql.Types.VARCHAR)
-    @Column(unique = true)
+    @Column(updatable = false)
     private UUID id;
 
     @NotBlank(message = "O nome não pode ser vazio.")

@@ -1,12 +1,10 @@
 package com.splithome.application.entities.transaction;
 
-import com.splithome.application.DTOs.TransactionDTO;
-import com.splithome.application.entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Date;
@@ -16,35 +14,32 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Transaction {
 
     @Id
     @UuidGenerator
-    @JdbcTypeCode(java.sql.Types.VARCHAR)
-    @Column(unique = true)
+    @Column(updatable = false)
     private UUID id;
 
+    @NotNull
     private TransactionType type;
 
-    @NotBlank
+    @NotBlank(message = "A transação precisa ter um título")
     private String title;
 
-    @NotBlank
+    @NotNull
     private Category category;
 
-    @NotBlank
+    @NotNull
     private double value;
 
-    @OneToMany(mappedBy = "transaction")
-    @JoinColumn(name = "transaction_id")
-    private List<User> payers;
+    @ElementCollection
+    private List<String> payers;
 
-    @NotBlank
+    @NotNull
     private Date paymentDate;
 
-    @OneToMany(mappedBy = "transaction")
-    @JoinColumn(name = "transaction_id")
-    private List<User> remainingPayers;
-
-    public abstract void updateTransaction(TransactionDTO transactionDTO);
+    @ElementCollection
+    private List<String> remainingPayers;
 }
