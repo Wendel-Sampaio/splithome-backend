@@ -4,6 +4,7 @@ import com.splithome.application.entities.transaction.Expense;
 import com.splithome.application.entities.transaction.Purchase;
 import com.splithome.application.repositories.ExpenseRepository;
 import com.splithome.application.repositories.PurchaseRepository;
+import com.splithome.application.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class TransactionService {
     private PurchaseRepository purchaseRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ExpenseRepository expenseRepository;
 
     public List<Purchase> getAllPurchases() {
@@ -26,14 +30,16 @@ public class TransactionService {
         return expenseRepository.findAll();
     }
 
-    public String savePurchase(Purchase purchase) {
-        purchaseRepository.save(purchase);
-        return "Erro ao salvar no banco de dados!";
+    public void savePurchase(Purchase purchase) {
+        if (userRepository.existsById(purchase.getPurchaserId())) {
+            purchaseRepository.save(purchase);
+        }
     }
 
-    public String saveExpense(Expense expense) {
-        expenseRepository.save(expense);
-        return "Erro ao salvar no banco de dados!";
+    public void saveExpense(Expense expense) {
+        if (userRepository.existsById(expense.getResponsibleId())) {
+            expenseRepository.save(expense);
+        }
     }
 
 }

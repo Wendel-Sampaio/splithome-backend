@@ -40,7 +40,6 @@ public class User implements UserDetails {
     private String email;
 
     @NotBlank(message = "A senha não pode ser vazia.")
-    @Size(min = 8, message = "A senha precisa ter pelo menos 8 caracteres.")
     private String password;
 
     @Column(name = "phone_number", unique = true, length = 11)

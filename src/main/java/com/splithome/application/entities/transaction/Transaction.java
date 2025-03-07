@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public abstract class Transaction {
     private List<String> payers;
 
     @NotNull
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     @ElementCollection
     private List<String> remainingPayers;

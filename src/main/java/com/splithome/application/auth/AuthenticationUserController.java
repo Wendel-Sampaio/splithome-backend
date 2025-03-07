@@ -6,16 +6,14 @@ import com.splithome.application.DTOs.RegisterDTO;
 import com.splithome.application.entities.User;
 import com.splithome.application.repositories.UserRepository;
 import com.splithome.application.security.TokenService;
+import com.splithome.application.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
@@ -27,26 +25,21 @@ public class AuthenticationUserController {
     private UserRepository userRepository;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private UserService userService;
 
     @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {
-        var emailPassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-        var auth = authenticationManager.authenticate(emailPassword);
-        var token = tokenService.generateToken((User) auth.getPrincipal());
+        String token = userService.loginUser(data);
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Entity> register(@RequestBody @Valid RegisterDTO data){
-        if(this.userRepository.findByEmail(data.email()) !=  null) ResponseEntity.badRequest().build();
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User user = new User(data.name(), data.email(), encryptedPassword);
-        this.userRepository.save(user);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO data){
+        userService.registerUser(data);
+        return ResponseEntity.ok("Usuário cadastrado com sucesso!");
     }
 
     @GetMapping("/listall")

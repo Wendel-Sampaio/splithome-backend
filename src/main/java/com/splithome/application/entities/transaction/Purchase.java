@@ -1,15 +1,11 @@
 package com.splithome.application.entities.transaction;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -21,5 +17,5 @@ public class Purchase extends Transaction {
     private UUID purchaserId;
 
     @NotNull(message = "A data não pode ser nula")
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
 }

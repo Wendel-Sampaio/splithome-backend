@@ -24,6 +24,7 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("split-home")
                     .withSubject(user.getEmail())
+                    .withClaim("name", user.getName())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
