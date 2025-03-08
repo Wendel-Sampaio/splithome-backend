@@ -4,7 +4,6 @@ import com.splithome.application.exceptions.DuplicateEmailException;
 import com.splithome.application.exceptions.EmailNotFoundException;
 import com.splithome.application.exceptions.SimplePasswordException;
 import com.splithome.application.exceptions.WrongPasswordException;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -36,12 +36,8 @@ public class TransactionController {
     }
 
     @PostMapping("/new-purchase")
-    public ResponseEntity<?> saveExpense(@RequestBody Purchase purchase) {
-        try {
-            transactionService.savePurchase(purchase);
-        } catch (Exception e) {
-            return null;
-        }
-        return null;
+    public ResponseEntity<Purchase> saveExpense(@RequestBody Purchase purchase) {
+        transactionService.savePurchase(purchase);
+        return ResponseEntity.ok(purchase);
     }
 }

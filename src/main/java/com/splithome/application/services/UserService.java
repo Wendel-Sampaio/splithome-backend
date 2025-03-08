@@ -2,6 +2,7 @@ package com.splithome.application.services;
 
 import com.splithome.application.DTOs.AuthenticationDTO;
 import com.splithome.application.DTOs.RegisterDTO;
+import com.splithome.application.DTOs.UserDTO;
 import com.splithome.application.exceptions.DuplicateEmailException;
 import com.splithome.application.exceptions.EmailNotFoundException;
 import com.splithome.application.exceptions.SimplePasswordException;
@@ -19,6 +20,7 @@ import com.splithome.application.entities.User;
 import com.splithome.application.repositories.UserRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -61,4 +63,8 @@ public class UserService {
         }
     }
 
+    public UserDTO getUserById(UUID id) {
+        User user = userRepository.getUsersById(id);
+        return new UserDTO(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
+    }
 }
