@@ -1,4 +1,4 @@
 package com.splithome.application.DTOs;
 
-public record RegisterDTO(String name, String email, String password) {
+public record RegisterDTO(String name, String email, String password, String phoneNumber, String pixKey) {
 }

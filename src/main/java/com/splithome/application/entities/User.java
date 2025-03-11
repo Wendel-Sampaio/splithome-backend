@@ -52,12 +52,12 @@ public class User implements UserDetails {
     @Column(name = "pix_key", unique = true)
     private String pixKey;
 
-    public User(String name, String email, String encryptedPassword) {
+    public User(String name, String email, String encryptedPassword, String phoneNumber, String pixKey) {
         this.name = name;
         this.email = email;
         this.password = encryptedPassword;
-        this.phoneNumber = null;
-        this.pixKey = null;
+        this.phoneNumber = phoneNumber;
+        this.pixKey = pixKey;
     }
 
     @JsonIgnore

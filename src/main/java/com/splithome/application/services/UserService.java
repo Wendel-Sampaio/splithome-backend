@@ -43,7 +43,7 @@ public class UserService {
             throw new SimplePasswordException();
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User user = new User(data.name(), data.email().toLowerCase(), encryptedPassword);
+        User user = new User(data.name(), data.email().toLowerCase(), encryptedPassword, data.phoneNumber(), data.pixKey());
         userRepository.save(user);
     }
 
