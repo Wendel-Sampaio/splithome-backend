@@ -1,12 +1,15 @@
 package com.splithome.application.controllers;
 
+import com.splithome.application.entities.transaction.Category;
 import com.splithome.application.entities.transaction.Expense;
 import com.splithome.application.entities.transaction.Purchase;
 import com.splithome.application.services.TransactionService;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,5 +42,14 @@ public class TransactionController {
     public ResponseEntity<Purchase> saveExpense(@RequestBody Purchase purchase) {
         transactionService.savePurchase(purchase);
         return ResponseEntity.ok(purchase);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List<Category> categories = new ArrayList<>();
+        for(Category category : Category.values()) {
+            categories.add(category);
+        }
+        return ResponseEntity.ok(categories);
     }
 }

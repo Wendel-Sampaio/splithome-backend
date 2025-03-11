@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.splithome.application.entities.User;
 import com.splithome.application.repositories.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,10 +34,6 @@ public class UserService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
 
     public void registerUser(RegisterDTO data) {
         if (userRepository.findByEmail(data.email()) != null) {
@@ -66,5 +63,15 @@ public class UserService {
     public UserDTO getUserById(UUID id) {
         User user = userRepository.getUsersById(id);
         return new UserDTO(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
+    }
+
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> usersDto = new ArrayList<>();
+        for (User user : users) {
+            UserDTO userDto = new UserDTO(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
+            usersDto.add(userDto);
+        }
+        return usersDto;
     }
 }

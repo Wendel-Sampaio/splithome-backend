@@ -25,6 +25,7 @@ public class TokenService {
                     .withIssuer("split-home")
                     .withSubject(user.getEmail())
                     .withClaim("name", user.getName())
+                    .withClaim("id", user.getId().toString())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;

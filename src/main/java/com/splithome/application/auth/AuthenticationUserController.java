@@ -41,12 +41,8 @@ public class AuthenticationUserController {
     }
 
     @GetMapping("/listall")
-    public ResponseEntity<List<User>> listAll(){
-        List<User> users = this.userRepository.findAll();
-        if (users.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserDTO>> listAll(){
+        return ResponseEntity.ok(this.userService.getAllUsers());
     }
 
     @GetMapping("/{id}")
