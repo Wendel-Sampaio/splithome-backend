@@ -32,7 +32,7 @@ public class TransactionController {
         return ResponseEntity.ok(purchases);
     }
 
-    @PostMapping("new-expense")
+    @PostMapping("/new-expense")
     public ResponseEntity<Expense> saveExpense(@RequestBody Expense expense) {
         transactionService.saveExpense(expense);
         return ResponseEntity.ok(expense);
@@ -51,5 +51,11 @@ public class TransactionController {
             categories.add(category);
         }
         return ResponseEntity.ok(categories);
+    }
+
+    @PutMapping("/update-purchase")
+    public ResponseEntity<Purchase> updatePurchase(@RequestBody Purchase purchase) {
+        Purchase purchaseUpdated = transactionService.updatePurchase(purchase);
+        return ResponseEntity.ok(purchaseUpdated);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TransactionService {
@@ -42,4 +43,14 @@ public class TransactionService {
         }
     }
 
+    public Purchase updatePurchase(Purchase purchase) {
+        Optional<Purchase> selectedPurchaseOptional = purchaseRepository.findById(purchase.getId());
+        if (selectedPurchaseOptional.isPresent()) {
+            Purchase selectedPurchase = selectedPurchaseOptional.get();
+            selectedPurchase.setRemainingPayers(purchase.getRemainingPayers());
+            purchaseRepository.save(selectedPurchase);
+            return selectedPurchase;
+        }
+        return null;
+    }
 }
