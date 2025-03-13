@@ -77,6 +77,8 @@ public class UserService {
 
     public UserDTO editUserById(UUID id, UserDTO userDTO) {
         User userSelected = userRepository.getUsersById(id);
+        userSelected.setName(userDTO.name());
+        userSelected.setEmail(userDTO.email());
         userSelected.setPhoneNumber(userDTO.phoneNumber());
         userSelected.setPixKey(userDTO.pixKey());
         userRepository.save(userSelected);
