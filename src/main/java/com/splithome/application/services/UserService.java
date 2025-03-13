@@ -74,4 +74,12 @@ public class UserService {
         }
         return usersDto;
     }
+
+    public UserDTO editUserById(UUID id, UserDTO userDTO) {
+        User userSelected = userRepository.getUsersById(id);
+        userSelected.setPhoneNumber(userDTO.phoneNumber());
+        userSelected.setPixKey(userDTO.pixKey());
+        userRepository.save(userSelected);
+        return userDTO;
+    }
 }

@@ -49,4 +49,10 @@ public class AuthenticationUserController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable UUID id) {
         return ResponseEntity.ok(this.userService.getUserById(id));
     }
+
+    @PutMapping("/{id}/edit-user")
+    public ResponseEntity<UserDTO> editUserById(@PathVariable UUID id, @RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(this.userService.editUserById(id, userDTO));
+    }
+
 }
