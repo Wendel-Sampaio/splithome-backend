@@ -1,9 +1,6 @@
 package com.splithome.application.infra;
 
-import com.splithome.application.exceptions.DuplicateEmailException;
-import com.splithome.application.exceptions.EmailNotFoundException;
-import com.splithome.application.exceptions.SimplePasswordException;
-import com.splithome.application.exceptions.WrongPasswordException;
+import com.splithome.application.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -36,5 +33,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<RestGlobalErrorMessage> wrongPasswordHandler(WrongPasswordException exception) {
         RestGlobalErrorMessage response = new RestGlobalErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(PurchaseNotFoundException.class)
+    private ResponseEntity<RestGlobalErrorMessage> purchaseNotFoundHandler(PurchaseNotFoundException exception) {
+        RestGlobalErrorMessage response = new RestGlobalErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 }
