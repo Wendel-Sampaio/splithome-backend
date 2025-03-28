@@ -1,0 +1,12 @@
+# application.properties.example
+
+# Database Configuration
+spring.application.name=application
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/<nome-do-banco>
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# API Security Configuration (JWT)
+api.security.token.secret=${JWT_SECRET:<sua-chave-secreta>}
