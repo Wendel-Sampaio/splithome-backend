@@ -4,7 +4,6 @@ import com.splithome.application.entities.transaction.Category;
 import com.splithome.application.entities.transaction.Expense;
 import com.splithome.application.entities.transaction.Purchase;
 import com.splithome.application.services.TransactionService;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +56,11 @@ public class TransactionController {
     public ResponseEntity<Purchase> updatePurchase(@RequestBody Purchase purchase) {
         Purchase purchaseUpdated = transactionService.updatePurchase(purchase);
         return ResponseEntity.ok(purchaseUpdated);
+    }
+
+    @DeleteMapping("/delete/{idPurchase}")
+    public ResponseEntity<String> deletePurchase(@PathVariable String idPurchase) {
+        transactionService.deletePurchase(idPurchase);
+        return ResponseEntity.ok("Compra deletada com sucesso!");
     }
 }
