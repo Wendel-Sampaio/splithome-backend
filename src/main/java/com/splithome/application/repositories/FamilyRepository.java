@@ -8,3 +8,4 @@ import com.splithome.application.entities.Family;
 
 public interface FamilyRepository extends JpaRepository<Family, UUID> {
 }
+    
