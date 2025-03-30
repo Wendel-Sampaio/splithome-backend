@@ -1,3 +1,32 @@
-src/main/resources/application.properties
+# Maven / Gradle
+target/
+build/
+
+# IntelliJ IDEA
 .idea/
+*.iml
+
+# Eclipse
 .settings/
+
+# Arquivos de log
+logs/
+
+# Arquivos de backup do sistema
+*~
+.DS_Store
+Thumbs.db
+
+# Arquivos gerados por compiladores
+out/
+
+# Arquivos de configuração sensíveis (usar variáveis de ambiente ou serviços como Spring Cloud Config)
+application.properties
+application.yml
+
+# Arquivos de dependências temporárias
+.mvn/
+.gradle/
+
+# Node.js (se aplicável)
+node_modules/
