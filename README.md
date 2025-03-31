@@ -81,8 +81,8 @@ api.security.token.secret=${JWT_SECRET:<sua-chave-secreta>}
 
 <table>
   <tr>
-    <td align="center">
-      <a href="#">
+    <td>
+      <a href="https://github.com/Wendel-Sampaio">
         <img src="https://avatars.githubusercontent.com/u/111626474?v=4" width="100px;" alt="Wendel Sampaio Profile Picture"/><br>
         <sub>
           <b>Wendel Sampaio</b>
@@ -90,7 +90,24 @@ api.security.token.secret=${JWT_SECRET:<sua-chave-secreta>}
         <sub><i>Owner</i></sub>
       </a>
     </td>
-  </tr>
+    <td>
+      <a href="https://github.com/NatanCesar">
+        <img src="https://avatars.githubusercontent.com/u/97604520?v=4" width="100px;" alt="Nataniel Cesar Profile Picture"/><br>
+        <sub>
+          <b>Nataniel Cesar</b>
+        </sub><br>
+        <sub><i>Collaborator</i></sub>
+      </a>
+    </td>
+     <td>
+      <a href="https://github.com/JLucioLP">
+        <img src="https://avatars.githubusercontent.com/u/140078702?v=4" width="100px;" alt="José Lúcio Profile Picture"/><br>
+        <sub>
+          <b>José Lúcio</b>
+        </sub><br>
+        <sub><i>Collaborator</i></sub>
+      </a>
+    </td>
 </table>
 
 <h2 id="contribute">📫 Contribute</h2>
