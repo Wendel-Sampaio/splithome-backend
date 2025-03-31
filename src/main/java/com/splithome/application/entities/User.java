@@ -6,10 +6,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -51,6 +48,11 @@ public class User implements UserDetails {
 
     @Column(name = "pix_key", unique = true)
     private String pixKey;
+
+
+    @ManyToOne
+    @JoinColumn(name = "family_id")
+    private Family family;
 
     public User(String name, String email, String encryptedPassword, String phoneNumber, String pixKey) {
         this.name = name;
