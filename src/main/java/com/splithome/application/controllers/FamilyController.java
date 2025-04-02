@@ -18,7 +18,7 @@ public class FamilyController {
     @Autowired
     private FamilyService familyService;
 
-    @PostMapping("new-family")
+    @PostMapping()
     public ResponseEntity<Family> createFamily(@RequestBody Family family) {
         familyService.saveFamily(family);
         return ResponseEntity.ok(family);
