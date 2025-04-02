@@ -24,13 +24,13 @@ public class FamilyController {
         return ResponseEntity.ok(family);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Family> getFamilyById(@PathVariable UUID id) {
         Family family = familyService.getFamilyById(id);
         return ResponseEntity.ok(family);
     }
 
-    @GetMapping("families")
+    @GetMapping
     public ResponseEntity<List<Family>> getAllFamily() {
         List<Family> families = familyService.getAllFamily();
         return ResponseEntity.ok(families);
@@ -42,7 +42,7 @@ public class FamilyController {
         return ResponseEntity.ok(newFamily);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFamily(@PathVariable UUID id) {
         familyService.removeFamily(id);
         return ResponseEntity.ok("family deleted");
