@@ -20,7 +20,7 @@ public class FamilyController {
 
     @PostMapping("new-family")
     public ResponseEntity<Family> createFamily(@RequestBody Family family) {
-        familyService.saveFamily();
+        familyService.saveFamily(family);
         return ResponseEntity.ok(family);
     }
 
