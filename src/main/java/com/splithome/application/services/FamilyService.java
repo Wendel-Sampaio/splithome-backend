@@ -17,9 +17,7 @@ public class FamilyService {
 
 
     public void saveFamily(Family family) {
-        if(familyRepository.existsById(family.getId())) {
-            familyRepository.save(family);
-        }
+        familyRepository.save(family);
     }
 
     public Family getFamilyById(UUID id) {
