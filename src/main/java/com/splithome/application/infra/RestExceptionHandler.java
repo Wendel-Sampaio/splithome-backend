@@ -46,4 +46,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         RestGlobalErrorMessage response = new RestGlobalErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
+
+    @ExceptionHandler(FamilyNotFoundException.class)
+    private ResponseEntity<RestGlobalErrorMessage> familyNotFoundHandler(FamilyNotFoundException exception) {
+        RestGlobalErrorMessage response = new RestGlobalErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
 }
