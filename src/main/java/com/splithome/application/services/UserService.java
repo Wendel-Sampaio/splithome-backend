@@ -62,14 +62,14 @@ public class UserService {
 
     public UserDTO getUserById(UUID id) {
         User user = userRepository.getUsersById(id);
-        return new UserDTO(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
+        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
     }
 
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserDTO> usersDto = new ArrayList<>();
         for (User user : users) {
-            UserDTO userDto = new UserDTO(user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
+            UserDTO userDto = new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
             usersDto.add(userDto);
         }
         return usersDto;

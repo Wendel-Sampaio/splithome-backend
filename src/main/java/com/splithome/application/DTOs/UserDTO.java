@@ -1,4 +1,6 @@
 package com.splithome.application.DTOs;
 
-public record UserDTO(String name, String email, String phoneNumber, String pixKey) {
+import java.util.UUID;
+
+public record UserDTO(UUID id, String name, String email, String phoneNumber, String pixKey) {
 }

@@ -40,4 +40,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         RestGlobalErrorMessage response = new RestGlobalErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
+
+    @ExceptionHandler(PurchaserNotFoundException.class)
+    private ResponseEntity<RestGlobalErrorMessage> purchaserNotFoundHandler(PurchaserNotFoundException exception) {
+        RestGlobalErrorMessage response = new RestGlobalErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
 }
