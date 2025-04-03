@@ -4,5 +4,5 @@ import com.splithome.application.entities.Family;
 
 import java.util.UUID;
 
-public record UserDTO(UUID id, String name, String email, String phoneNumber, String pixKey, Family family) {
+public record UserDTO(UUID id, String name, String email, String phoneNumber, String pixKey, String familyId) {
 }
