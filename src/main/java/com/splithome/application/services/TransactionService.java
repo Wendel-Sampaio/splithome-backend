@@ -3,6 +3,7 @@ package com.splithome.application.services;
 import com.splithome.application.entities.transaction.Expense;
 import com.splithome.application.entities.transaction.Purchase;
 import com.splithome.application.exceptions.PurchaseNotFoundException;
+import com.splithome.application.exceptions.PurchaserNotFoundException;
 import com.splithome.application.repositories.ExpenseRepository;
 import com.splithome.application.repositories.PurchaseRepository;
 import com.splithome.application.repositories.UserRepository;
@@ -12,11 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 @Service
 public class TransactionService {
-
 
     @Autowired
     private PurchaseRepository purchaseRepository;
@@ -38,6 +37,8 @@ public class TransactionService {
     public void savePurchase(Purchase purchase) {
         if (userRepository.existsById(purchase.getPurchaserId())) {
             purchaseRepository.save(purchase);
+        } else {
+            throw new PurchaserNotFoundException();
         }
     }
 
@@ -58,15 +59,11 @@ public class TransactionService {
         return null;
     }
 
-    public void deletePurchase(String idPurchase) {
-        UUID purchaseId = UUID.fromString(idPurchase);
-
-        if (purchaseRepository.existsById(purchaseId)) {
-            purchaseRepository.deleteById(purchaseId);
-            System.out.println("Purchase deleted");
+    public void deletePurchase(String purchaseId) {
+        if (purchaseRepository.existsById(UUID.fromString(purchaseId))) {
+            purchaseRepository.deleteById(UUID.fromString(purchaseId));
         } else {
-            System.out.println("Purchase not found: " + purchaseId);
-            throw new PurchaseNotFoundException("Purchase with ID " + idPurchase + " not found.");
+            throw new PurchaseNotFoundException();
         }
     }
 }
