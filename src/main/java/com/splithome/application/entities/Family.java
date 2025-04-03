@@ -29,26 +29,20 @@ public class Family {
     @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 à 50 caracteres.")
     private String name;
 
+    private String familyCode;
+
     @OneToMany(mappedBy = "family")
     @JsonManagedReference
     private List<User> members;
 
-    private String familyCode;
+
+
 
 
     public void addMember (User user) {
         this.members.add(user);
     }
 
-    @Override
-    public String toString() {
-        return "Family{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", familyCode='" + familyCode + '\'' +
-                ", members=" + members +
-                '}';
-    }
 
 
 }
