@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface FamilyRepository extends JpaRepository<Family, UUID> {
+
+    boolean existsByFamilyCode(String generatedCode);
 }
