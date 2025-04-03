@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -52,15 +53,19 @@ public class User implements UserDetails {
 
     @ManyToOne
     @JoinColumn(name = "family_id")
+    @JsonBackReference
     private Family family;
 
-    public User(String name, String email, String encryptedPassword, String phoneNumber, String pixKey) {
+    public User(String name, String email, String encryptedPassword, String phoneNumber, String pixKey, Family family) {
         this.name = name;
         this.email = email;
         this.password = encryptedPassword;
         this.phoneNumber = phoneNumber;
         this.pixKey = pixKey;
+        this.family = family;
     }
+
+
 
     @JsonIgnore
     @Override

@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface FamilyRepository extends JpaRepository<Family, UUID> {
 
     boolean existsByFamilyCode(String generatedCode);
+
+    Family getFamilyByFamilyCode(String familyCode);
 }

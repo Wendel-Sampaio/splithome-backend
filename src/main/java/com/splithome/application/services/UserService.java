@@ -3,10 +3,9 @@ package com.splithome.application.services;
 import com.splithome.application.DTOs.AuthenticationDTO;
 import com.splithome.application.DTOs.RegisterDTO;
 import com.splithome.application.DTOs.UserDTO;
-import com.splithome.application.exceptions.DuplicateEmailException;
-import com.splithome.application.exceptions.EmailNotFoundException;
-import com.splithome.application.exceptions.SimplePasswordException;
-import com.splithome.application.exceptions.WrongPasswordException;
+import com.splithome.application.entities.Family;
+import com.splithome.application.exceptions.*;
+import com.splithome.application.repositories.FamilyRepository;
 import com.splithome.application.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +34,9 @@ public class UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private FamilyRepository familyRepository;
+
     public void registerUser(RegisterDTO data) {
         if (userRepository.findByEmail(data.email()) != null) {
             throw new DuplicateEmailException();
@@ -42,8 +44,12 @@ public class UserService {
         if (data.password().length() < 8 || !data.password().matches(".*[!@#$%^&*(),.?\":{}|<>].*")) {
             throw new SimplePasswordException();
         }
+        if(!familyRepository.existsByFamilyCode(data.familyCode())) {
+            throw new FamilyNotFoundException();
+        }
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User user = new User(data.name(), data.email().toLowerCase(), encryptedPassword, data.phoneNumber(), data.pixKey());
+        Family userFamily = familyRepository.getFamilyByFamilyCode(data.familyCode());
+        User user = new User(data.name(), data.email().toLowerCase(), encryptedPassword, data.phoneNumber(), data.pixKey(), userFamily);
         userRepository.save(user);
     }
 
@@ -62,14 +68,14 @@ public class UserService {
 
     public UserDTO getUserById(UUID id) {
         User user = userRepository.getUsersById(id);
-        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
+        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey(), user.getFamily());
     }
 
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserDTO> usersDto = new ArrayList<>();
         for (User user : users) {
-            UserDTO userDto = new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey());
+            UserDTO userDto = new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey(), user.getFamily());
             usersDto.add(userDto);
         }
         return usersDto;

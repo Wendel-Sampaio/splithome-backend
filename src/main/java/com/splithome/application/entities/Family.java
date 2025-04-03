@@ -1,11 +1,13 @@
 package com.splithome.application.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,10 +29,16 @@ public class Family {
     @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 à 50 caracteres.")
     private String name;
 
-    @OneToMany (mappedBy = "family", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "family")
+    @JsonManagedReference
     private List<User> members;
 
     private String familyCode;
+
+
+    public void addMember (User user) {
+        this.members.add(user);
+    }
 
     @Override
     public String toString() {
