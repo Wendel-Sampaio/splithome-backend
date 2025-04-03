@@ -9,9 +9,8 @@ import org.hibernate.annotations.UuidGenerator;
 import java.util.List;
 import java.util.UUID;
 
-@Data
-@Entity (name = "family")
-@Table (name = "family")
+@Entity
+@Table
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,8 +19,9 @@ public class Family {
 
     @Id
     @UuidGenerator
-    @Column (updatable = false)
+    @Column(updatable = false)
     private UUID id;
+
 
     @NotBlank(message = "O nome não pode ser vazio.")
     @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 à 50 caracteres.")
@@ -30,8 +30,18 @@ public class Family {
     @OneToMany (mappedBy = "family", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<User> members;
 
-    @NotBlank
     private String familyCode;
+
+    @Override
+    public String toString() {
+        return "Family{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", familyCode='" + familyCode + '\'' +
+                ", members=" + members +
+                '}';
+    }
+
 
 }
 
