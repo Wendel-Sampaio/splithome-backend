@@ -25,7 +25,7 @@ public class FamilyService {
         if (familyRepository.existsById(id)) {
             return familyRepository.findById(id).get();
         } else {
-            throw new FamilyNotFoundException("Family with ID " + id + " not found");
+            throw new FamilyNotFoundException();
         }
     }
 
@@ -38,7 +38,7 @@ public class FamilyService {
             familyRepository.save(family);
             return family;
         } else {
-            throw new FamilyNotFoundException("Family with ID " + family.getId() + " not found");
+            throw new FamilyNotFoundException();
         }
     }
 
@@ -46,7 +46,7 @@ public class FamilyService {
         if (familyRepository.existsById(id)) {
             familyRepository.deleteById(id);
         } else {
-            throw new FamilyNotFoundException("Family with ID " + id + " not found");
+            throw new FamilyNotFoundException();
         }
     }
 
