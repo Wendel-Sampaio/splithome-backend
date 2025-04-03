@@ -54,13 +54,16 @@ public class User implements UserDetails {
     @JoinColumn(name = "family_id")
     private Family family;
 
-    public User(String name, String email, String encryptedPassword, String phoneNumber, String pixKey) {
+    public User(String name, String email, String encryptedPassword, String phoneNumber, String pixKey, Family family) {
         this.name = name;
         this.email = email;
         this.password = encryptedPassword;
         this.phoneNumber = phoneNumber;
         this.pixKey = pixKey;
+        this.family = family;
     }
+
+
 
     @JsonIgnore
     @Override
