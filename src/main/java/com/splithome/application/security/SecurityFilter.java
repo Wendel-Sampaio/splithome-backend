@@ -1,5 +1,6 @@
 package com.splithome.application.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.splithome.application.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Map;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -36,9 +38,24 @@ public class SecurityFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
-        if (authHeader == null) return null;
-        return authHeader.replace("Bearer ", "");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) return null;
+
+        var tokenPart = authHeader.replace("Bearer ", "").trim();
+
+        if (tokenPart.startsWith("{")) {
+            int start = tokenPart.indexOf(":\"") + 2;
+            int end = tokenPart.indexOf("\"", start);
+            return tokenPart.substring(start, end);
+        }
+
+        return tokenPart;
     }
+
+
+
+
+
 }
