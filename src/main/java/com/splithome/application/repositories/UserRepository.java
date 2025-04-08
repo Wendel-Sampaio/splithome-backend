@@ -1,5 +1,6 @@
 package com.splithome.application.repositories;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,6 @@ public interface UserRepository extends JpaRepository<User, UUID>{
     UserDetails findByEmail(String email);
 
     User getUsersById(UUID id);
+
+    List<User> findAllByFamilyFamilyCode(String userFamilyCode);
 }

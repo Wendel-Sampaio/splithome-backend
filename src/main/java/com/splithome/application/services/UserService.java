@@ -12,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +74,7 @@ public class UserService {
     }
 
     public List<UserDTO> getAllUsers() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAllByFamilyFamilyCode(this.getUserFamilyCode());
         List<UserDTO> usersDto = new ArrayList<>();
         for (User user : users) {
             UserDTO userDto = new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber(), user.getPixKey(), user.getFamily().getFamilyCode());
@@ -89,5 +91,14 @@ public class UserService {
         userSelected.setPixKey(userDTO.pixKey());
         userRepository.save(userSelected);
         return userDTO;
+    }
+
+    private String getUserFamilyCode(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            User user = (User) userRepository.findByEmail(userDetails.getUsername());
+            return user.getFamily().getFamilyCode();
+        }
+        throw new FamilyNotFoundException();
     }
 }
