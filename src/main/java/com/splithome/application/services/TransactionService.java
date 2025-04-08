@@ -1,6 +1,5 @@
 package com.splithome.application.services;
 
-import com.splithome.application.entities.Family;
 import com.splithome.application.entities.User;
 import com.splithome.application.entities.transaction.Expense;
 import com.splithome.application.entities.transaction.Purchase;
@@ -40,7 +39,7 @@ public class TransactionService {
     }
 
     public List<Expense> getAllExpenses() {
-        return expenseRepository.findAllByFamilyCode(this.getUserFamilyCode());
+        return expenseRepository.findAllByFamilyFamilyCode(this.getUserFamilyCode());
     }
 
     public void savePurchase(Purchase purchase) {
