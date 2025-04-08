@@ -1,5 +1,7 @@
 package com.splithome.application.entities.transaction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.splithome.application.entities.Family;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -39,4 +41,27 @@ public abstract class Transaction {
 
     @ElementCollection
     private List<String> remainingPayers;
+
+    @ManyToOne
+    @JoinColumn(name = "family_id")
+    @JsonBackReference
+    private Family family;
+
+    public String getFamilyCode() {
+        return family != null ? family.getFamilyCode() : null;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", category=" + category +
+                ", value=" + value +
+                ", payers=" + payers +
+                ", paymentDate=" + paymentDate +
+                ", remainingPayers=" + remainingPayers +
+                ", familyCode=" + family.getFamilyCode() +
+                '}';
+    }
 }
