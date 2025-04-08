@@ -1,6 +1,5 @@
 package com.splithome.application.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.splithome.application.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,7 +14,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Map;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {

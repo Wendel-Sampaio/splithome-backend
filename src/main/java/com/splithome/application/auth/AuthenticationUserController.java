@@ -4,9 +4,6 @@ import com.splithome.application.DTOs.AuthenticationDTO;
 import com.splithome.application.DTOs.LoginResponseDTO;
 import com.splithome.application.DTOs.RegisterDTO;
 import com.splithome.application.DTOs.UserDTO;
-import com.splithome.application.entities.User;
-import com.splithome.application.repositories.UserRepository;
-import com.splithome.application.security.TokenService;
 import com.splithome.application.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +18,6 @@ import java.util.UUID;
 @RequestMapping("api/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationUserController {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
