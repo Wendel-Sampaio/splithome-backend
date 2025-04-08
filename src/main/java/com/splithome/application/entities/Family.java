@@ -24,7 +24,6 @@ public class Family {
     @Column(updatable = false)
     private UUID id;
 
-
     @NotBlank(message = "O nome não pode ser vazio.")
     @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 à 50 caracteres.")
     private String name;
@@ -36,14 +35,16 @@ public class Family {
     private List<User> members;
 
 
-
-
-
     public void addMember (User user) {
         this.members.add(user);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Family{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", familyCode='" + familyCode + '\'';
+    }
 }
 
