@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/family")
-@CrossOrigin(origins = "http://localhost:4200")
 public class FamilyController {
 
     @Autowired
